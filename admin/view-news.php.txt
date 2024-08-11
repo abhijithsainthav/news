@@ -1,0 +1,23 @@
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "news_scoop";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$sql = "SELECT news.id, news.title, news.content, news.image, categories.name AS category
+        FROM news
+        LEFT JOIN categories ON news.category_id = categories.id
+        ORDER BY news.created_at DESC";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+        echo "<h2>"
