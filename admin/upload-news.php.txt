@@ -14,7 +14,6 @@ if ($conn->connect_error) {
 
 $title = $_POST['title'];
 $content = $_POST['content'];
-$category = $_POST['category'];
 
 // Handle file upload
 $target_dir = "../images/";
@@ -49,7 +48,7 @@ if ($uploadOk == 0) {
 // if everything is ok, try to upload file
 } else {
     if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
-        $sql = "INSERT INTO news (title, content, image, category_id) VALUES ('$title', '$content', '$target_file', '$category')";
+        $sql = "INSERT INTO news (title, content, image) VALUES ('$title', '$content', '$target_file')";
 
         if ($conn->query($sql) === TRUE) {
             echo "New record created successfully";
